@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    
+</head>
+<body>
+<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<!-- Here we add the panel slider jQuery UI widget -->
+<script src="panelSlider.js"></script>
+
+<script type="text/javascript">
+    /*
+    Declaring the panelSlide variable here, so it's available in all javascript functions.
+    */
+    var panelSlide=null;
+    
+    $(function() {
+        /*
+        Initialise the panelSlider with a list of id's which should be slideable,
+        and attach the panelSlide widget to a specific DOM object (in this case the div with it 'wrapper')
+        */
+        panelSlide = $("#wrapper").panelSlider({panels:["lamp_list","content_div"]});
+    });
+
+    function compileList(parentId, contentList){
+        $("#"+parentId).empty();
+        
+        $.each(contentList,function(i, el){
+            el.appendTo("#"+parentId);
+        });
+    }
+    
+    function specificLampView(lampId){
+        $.each(lampList,function(key, val){
+            if(val.id==lampId){
+                $("#content_div_header_text").text("ID: "+val.id+" Luminosity: "+ (val.state.on ? val.state.brightness : 0));
+                
+                $("#content_div_header_button").text("Back");
+                
+                $("#content_div_header_button").unbind("click").click(function(){
+                    panelSlide.panelSlider("slide","lamp_list",true);
+                });
+                
+                $("#content_div_body").text("Suggest alteration");
+                
+                $("#content_div_properties").text("bla");
+                
+                panelSlide.panelSlider("slide","content_div",false);
+                return false;
+            }
+        });
+    }
+    
+    
+</script>
+
+
+<div id="wrapper" class="clearfix">
+        <div class="list-group" id="lamp_list"></div>
+    
+        <div id="content_div" class="panel panel-default">
+            <div class="panel-heading clearfix" id="content_div_header">
+                <span id="content_div_header_text" class="h4 pull-left"></span>
+                <button id="content_div_header_button" class="btn btn-primary pull-right"></button>
+            </div>
+            
+            <div class="panel-body" id="content_div_body"></div>
+        
+            <div class="list-group" id="content_div_properties"></div>
+        </div>
+</div>
+
+</body>
+</html>
