@@ -27,21 +27,13 @@
         Initialise the panelSlider with a list of id's which should be slideable,
         and attach the panelSlide widget to a specific DOM object (in this case the div with it 'wrapper')
         */
-        panelSlide = $("#wrapper").panelSlider({panels:["view1","view2"]});
+        panelSlide = $("#wrapper").panelSlider({panels:["view1","view2","view3"]});
         
         //Here we add an extra panel after initialisation
-        panelSlide.panelSlider("addPanel","view3");
+        panelSlide.panelSlider("addPanel","view4");
         
-        //This is a jQuery example of how to interact with the panel slider
-        $("#view1 a").click(function(){
-            panelSlide.panelSlider("slide","view2",false);
-        });
-        
-        $("#view2 a").click(function(){
-            panelSlide.panelSlider("slide","view3",false);
-        });
-        
-        $("#view3 a").click(function(){
+        //How to use sliding with click event on other than a elements
+        $("#view4").click(function(){
             panelSlide.panelSlider("slide","view1",true);
         });
     });
@@ -52,24 +44,32 @@
     <div class="jumbotron" id="view1">
         <div class="container">
             <h1>First panel</h1>
-            <p>This i the first panel in line</p>
-            <a class="btn btn-primary btn-large">Go to view 2</a>
+            <p>This is the first panel in line</p>
+            <a href="view2" class="btn btn-primary btn-large">Go to view 2</a>
         </div>
     </div>
     
     <div class="jumbotron" id="view2">
         <div class="container">
             <h1>Second panel</h1>
-            <p>This i the second panel in line</p>
-            <a class="btn btn-primary btn-large">Go to view 3</a>
+            <p>This is the second panel in line</p>
+            <a href="view3" class="btn btn-primary btn-large">Go to view 3</a>
         </div>
     </div>
     
     <div class="jumbotron" id="view3">
         <div class="container">
             <h1>Third panel</h1>
-            <p>This i the third panel in line</p>
-            <a class="btn btn-primary btn-large">Go to view 1</a>
+            <p>This is the third panel in line</p>
+            <a href="view4" class="btn btn-primary btn-large">Go to view 4</a>
+        </div>
+    </div>
+    
+    <div class="jumbotron" id="view4">
+        <div class="container">
+            <h1>Fourth panel</h1>
+            <p>This is the Fourth panel in line. Click somewhere to go back to view 1 (except the link :-)</p>
+            <a href="something" class="btn btn-primary btn-large">Do something</a>
         </div>
     </div>
 </div>

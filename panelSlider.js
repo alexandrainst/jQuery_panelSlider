@@ -6,20 +6,47 @@ $.widget( "alexandra.panelSlider", {
     
     //The constructor of the panelSLide widget
     _create: function() {
+        var tempThis=this;
         this.element.addClass("panelSlider");
         this.options.currentView=this.options.panels[0];
         
         $.each(this.options.panels, function(i, val){
             $("#"+val).hide();
+            tempThis._checkLinks(val);
+              
         });
         
         $("#"+this.options.currentView).show();
+    },
+    
+    _checkLinks: function(val){
+        var tempThis=this;
+        $("#"+val+" a").click(function (event) {
+                event.preventDefault();
+                var url = $(this).attr('href');
+                var urlRegex = '/^(https?://)?([da-z.-]+).([a-z.]{2,6})([/w .-]*)*/?$/';
+                var res = url.match(urlRegex);
+                if(res==null){
+                    var newView=$.inArray(url,tempThis.options.panels);
+                    if(newView>-1){
+                        var curView=$.inArray(tempThis.options.currentView,tempThis.options.panels);
+                        console.log("new: "+newView+", current: "+curView);
+                        if(newView>curView)
+                            tempThis.slide(url,false);
+                        else if(newView<curView)
+                            tempThis.slide(url,true);
+                        return;
+                    }
+                }
+                window.location = url;
+            });
     },
  
     //It's possible to add a panel in runtime
     addPanel: function(panel) {
         this.options.panels.push(panel);
         $("#"+panel).hide();
+        this._checkLinks(panel);
     },
     
     //A panel can be removed runtime
