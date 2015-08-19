@@ -23,6 +23,7 @@ $.widget( "alexandra.panelSlider", {
         var tempThis=this;
         $("#"+val+" a").click(function (event) {
                 event.preventDefault();
+                event.stopPropagation();
                 var url = $(this).attr('href');
                 var urlRegex = '/^(https?://)?([da-z.-]+).([a-z.]{2,6})([/w .-]*)*/?$/';
                 var res = url.match(urlRegex);
