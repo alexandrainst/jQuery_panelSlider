@@ -65,10 +65,15 @@ $.widget( "alexandra.panelSlider", {
             }
         });
         
-        this.element.append(currentPanel);
-        currentPanel.append($("#"+this.options.currentView));
+        //Needed for keeping padding and margin while transition happens
+        var innerWrapper=$("<div/>");
         
-        $("#"+this.options.currentView).hide("slide",{direction: goingBack ? "right" : "left"}, function(){
+        this.element.append(currentPanel);
+        currentPanel.append(innerWrapper);
+        innerWrapper.append($("#"+this.options.currentView));
+        
+        innerWrapper.hide("slide",{direction: goingBack ? "right" : "left"}, function(){
+            $("#"+tempCurrentView).hide();
             tempThis.element.append($("#"+tempCurrentView));
             currentPanel.remove();
         });
@@ -87,10 +92,16 @@ $.widget( "alexandra.panelSlider", {
             }
         });
         
-        this.element.append(newPanel);
-        newPanel.append($("#"+panelToShow));
+        //Needed for keeping padding and margin while transition happens
+        var innerWrapper2=$("<div/>");
+        innerWrapper2.hide();
         
-        $("#"+panelToShow).show("slide",{direction: goingBack ? "left" : "right"},function(){
+        this.element.append(newPanel);
+        newPanel.append(innerWrapper2);
+        innerWrapper2.append($("#"+panelToShow));
+        $("#"+panelToShow).show();
+        
+        innerWrapper2.show("slide",{direction: goingBack ? "left" : "right"},function(){
             tempThis.element.append($("#"+panelToShow));
             newPanel.remove();
         });
