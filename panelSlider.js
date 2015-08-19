@@ -17,18 +17,20 @@ $.widget( "alexandra.panelSlider", {
     },
  
     //It's possible to add a panel in runtime
-    addPanel: function( panel ) {
+    addPanel: function(panel) {
         this.options.panels.push(panel);
-        
         $("#"+panel).hide();
     },
     
-    //A panel can be removed runtim
+    //A panel can be removed runtime
     removePanel: function(panel){
         for(var i=0;i<this.options.panels.length;i++){
             if(this.options.panels[i]==panel){
-                if(panel==this.options.currentView)
+                if(panel==this.options.currentView){
+                    $("#"+panel).hide();
                     this.options.currentView= i-1<0 ? this.options.panels[1] : this.options.panels[i-1];
+                    $("#"+this.options.currentView).show();
+                }
                     
                 this.options.panels.splice(i, 1);
                 break;
@@ -39,6 +41,14 @@ $.widget( "alexandra.panelSlider", {
     //The function that actually does all the sliding
     //If the goingBack variable is true the sliding will happen from left to right, and vice versa
     slide: function(panelToShow, goingBack){
+    
+        /*
+        Making sure that only registered objects can act as panels.
+        Might be a little to rough to make such a hard return statement.
+        */
+        if($.inArray(panelToShow,this.options.panels)<0)
+            return "Not a registered panel";
+        
         var tempThis=this;
         var tempCurrentView=this.options.currentView;
         

@@ -24,8 +24,12 @@
         Initialise the panelSlider with a list of id's which should be slideable,
         and attach the panelSlide widget to a specific DOM object (in this case the div with it 'wrapper')
         */
-        panelSlide = $("#wrapper").panelSlider({panels:["view1","view2","view3"]});
+        panelSlide = $("#wrapper").panelSlider({panels:["view1","view2"]});
         
+        //Here we add an extra panel after initialisation
+        panelSlide.panelSlider("addPanel","view3");
+        
+        //This is a jQuery example of how to interact with the panel slider
         $("#view3 a").click(function(){
             panelSlide.panelSlider("slide","view1",true);
         });
