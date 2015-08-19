@@ -37,6 +37,7 @@ $.widget( "alexandra.panelSlider", {
     },
     
     //The function that actually does all the sliding
+    //If the goingBack variable is true the sliding will happen from left to right, and vice versa
     slide: function(panelToShow, goingBack){
         var tempThis=this;
         var tempCurrentView=this.options.currentView;

@@ -6,3 +6,6 @@ For now the panelSlider only works with id tags (not class tags). This is quite 
 
 
 Look into index.html for a specific example. It's quite simple
+
+#Current issues
+The widget works as intended. The only issue is that it seems that the list of panels is not really used, and therefore any DOM object can essentially be used as a panel.
