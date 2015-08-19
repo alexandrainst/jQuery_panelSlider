@@ -1,10 +1,10 @@
 $.widget( "alexandra.panelSlider", {
     options: {
-        currentView: null,
-        panels:[]
+        currentView: null, // The panel currently in focus
+        panels:[] // All panels added to the navigation system
     },
     
- 
+    //The constructor of the panelSLide widget
     _create: function() {
         this.element.addClass("panelSlider");
         this.options.currentView=this.options.panels[0];
@@ -16,13 +16,14 @@ $.widget( "alexandra.panelSlider", {
         $("#"+this.options.currentView).show();
     },
  
-    // Create a public method.
+    //It's possible to add a panel in runtime
     addPanel: function( panel ) {
         this.options.panels.push(panel);
         
         $("#"+panel).hide();
     },
     
+    //A panel can be removed runtim
     removePanel: function(panel){
         for(var i=0;i<this.options.panels.length;i++){
             if(this.options.panels[i]==panel){
@@ -35,11 +36,15 @@ $.widget( "alexandra.panelSlider", {
         }
     },
     
+    //The function that actually does all the sliding
     slide: function(panelToShow, goingBack){
         var tempThis=this;
         var tempCurrentView=this.options.currentView;
         
-        //Old panel
+        /*
+        Temporary absolute positioned div for doing sliding of dfferent panels on same line.
+        This is the wrapper for the panel to slide off the screen
+        */
         var currentPanel=$("<div/>",{
             css:{
                 "position":"absolute",
@@ -58,7 +63,10 @@ $.widget( "alexandra.panelSlider", {
         });
         
         
-        //New panel
+        /*
+        Temporary absolute positioned div for doing sliding of dfferent panels on same line.
+        This is the wrapper for the panel to slide onto the screen
+        */
         var newPanel=$("<div/>",{
             css:{
                 "position":"absolute",
