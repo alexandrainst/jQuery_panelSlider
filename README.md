@@ -9,11 +9,11 @@ For making the panel slider work you need to do the following:
 * Create a html file and insert the necessary javascript libraries (go to jQuery website to fetch the latest versions)
 `<script src="http://code.jquery.com/jquery-1.11.1.min.js"></script>`
 `<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>`
-* You the need to declare the panelSlider variable like this: var panelSlide=null;
-*Then within the jQuery `$(function(){})` you should initialise the panelSlier by intering this line `panelSlide = $("#wrapper").panelSlider({panels:["view1","view2","view3"]});`.
-$("#wrapper") is the existing jQuery object you want to attach the panel slider to. In this case I'm using a div with an id=wrapper.
-.panelSlider() means that I'm making the jQuery object into a panelslider.
-The dictionary within the creation of the panelSlider {panels:["view1","view2","view3"]} is a list of registered panels. Each list element is the id of an object
+* You then need to declare the panelSlider variable like this: var panelSlide=null;
+* Then within the jQuery `$(function(){})` you should initialise the panelSlier by intering this line `panelSlide = $("#wrapper").panelSlider({panels:["view1","view2","view3"]});`.
+    1. $("#wrapper") is the existing jQuery object you want to attach the panel slider to. In this case I'm using a div with an id=wrapper.
+    2. .panelSlider() means that I'm making the jQuery object into a panelslider.
+    3. The dictionary within the creation of the panelSlider {panels:["view1","view2","view3"]} is a list of registered panels. Each list element is the id of an object
 
 When the above steps have been fulfilled the panel slider can be used in two ways:
 
